@@ -1,31 +1,36 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware"; // 로컬 스토리지 저장용
+import { persist, createJSONStorage } from "zustand/middleware"; // 로컬 스토리지 저장용
 
 interface AuthState {
-  token: string | null;
-  refreshToken: string | null;
-  authState: boolean | null;
-  setToken: (token: string) => void;
-  setRefreshToken: (refreshToken: string) => void;
+  authState: boolean;
+  newUser: boolean | null;
+  setAuthState: (authState: boolean) => void;
+  setNewUser: (newUser: boolean) => void;
   logout: () => void;
 }
 
-const initialState: Omit<AuthState, "setToken" | "setRefreshToken" | "logout"> =
+const initialState: Omit<AuthState, "setAuthState" | "setNewUser" | "logout"> =
   {
-    token: null,
-    refreshToken: null,
-    authState: null,
+    authState: false,
+    newUser: null,
   };
 
 const useAuthStore = create(
   persist<AuthState>(
     (set) => ({
       ...initialState,
-      setToken: (token: string) => set({ token, authState: true }),
-      setRefreshToken: (refreshToken: string) => set({ refreshToken }),
-      logout: () => set({ token: null, refreshToken: null, authState: false }),
+      setAuthState: (authState: boolean) => set({ authState }),
+      setNewUser: (newUser: boolean) => set({ newUser }),
+      logout: () =>
+        set({
+          authState: false,
+          newUser: null,
+        }),
     }),
-    { name: "auth-storage" } // 로컬 스토리지 키, 해당 키의 값으로 저장됨
+    {
+      name: "auth_storage",
+      storage: createJSONStorage(() => localStorage),
+    }
   )
 );
 

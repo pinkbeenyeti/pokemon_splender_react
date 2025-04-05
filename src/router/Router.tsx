@@ -1,24 +1,24 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LandingPage from "@/pages/Landing/LandingPage";
-import RedirectPage from "@/pages/Login/RedirectPage";
 import MainPage from "@/pages/Main/MainPage";
 import ProfilePage from "@/pages/Profile/ProfilePage";
 import Layout from "@/components/Layout/Layout";
 import ProtectedRoute from "@/router/Protect/ProtectedRoute";
 import ProtectedNewUserRoute from "./Protect/ProtectedNewUserRoute";
-import RoutePath from "@/router/RouterPath";
+//import LoadingPage from "@/pages/Loading/LoadingPage";
+import RouterPath from "@/router/RouterPath";
+//import LoginModal from "@/pages/Login/LoginModal";
 
 function Router() {
   const router = createBrowserRouter([
     {
-      path: RoutePath.HOME,
+      path: RouterPath.HOME,
       element: <LandingPage />,
     },
-    { path: RoutePath.OAUTH2_LOGIN, element: <RedirectPage /> },
     {
       path: "/",
       element: <ProtectedNewUserRoute />,
-      children: [{ path: RoutePath.PROFILE, element: <ProfilePage /> }],
+      children: [{ path: RouterPath.PROFILE, element: <ProfilePage /> }],
     },
     {
       path: "/",
@@ -26,7 +26,7 @@ function Router() {
       children: [
         {
           element: <ProtectedRoute />,
-          children: [{ path: RoutePath.MAIN, element: <MainPage /> }],
+          children: [{ path: RouterPath.MAIN, element: <MainPage /> }],
         },
       ],
     },

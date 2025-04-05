@@ -1,7 +1,7 @@
-function Layout() {
-  return (
-    <div>Layout</div>
-  )
-}
+import { Outlet } from "react-router-dom";
 
-export default Layout
+const Layout: React.FC = () => {
+  return <Outlet />;
+};
+
+export default Layout;

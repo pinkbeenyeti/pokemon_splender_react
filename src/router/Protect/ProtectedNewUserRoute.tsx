@@ -1,19 +1,33 @@
+import { useEffect, useState } from "react";
 import { Outlet, Navigate } from "react-router-dom";
-import useAuthStore from "@/stores/authStore";
+import { useAuthSync } from "@/api/userApi";
+import { getCookies, deleteCookie } from "@/utils/cookies";
+import LoadingPage from "@/pages/Loading/LoadingPage";
+import RouterPath from "@/router/RouterPath";
 
 const ProtectedNewUserRoute = () => {
-  const authState = useAuthStore((state) => state.authState);
-  const newUser = useAuthStore((state) => state.newUser);
+  const isAuthenticated = useAuthSync();
+  const [isNewUser, setIsNewUser] = useState(false);
 
-  if (!authState) {
-    return null; // 인증되지 않은 사용자는 아무것도 보이지 않음
+  useEffect(() => {
+    const cookies = getCookies();
+    const cookieNewUser = cookies["new_user"]?.toLowerCase() === "true";
+    if (cookieNewUser) {
+      setIsNewUser(true);
+      deleteCookie("new_user");
+    }
+  }, []);
+
+  if (isAuthenticated === null) {
+    return <LoadingPage />;
   }
 
-  if (newUser) {
-    return <Outlet />; // 새로운 사용자면 내부 페이지 렌더링
+  if (!isAuthenticated) {
+    alert("로그인에 실패했습니다. 다시 시도해주세요.");
+    return <Navigate to={RouterPath.HOME} replace />;
   }
 
-  return <Navigate to="/main" replace />; // 기존 사용자면 메인 페이지로 이동
+  return isNewUser ? <Outlet /> : <Navigate to={RouterPath.MAIN} replace />;
 };
 
 export default ProtectedNewUserRoute;

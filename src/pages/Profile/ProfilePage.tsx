@@ -17,6 +17,7 @@ const ProfilePage: React.FC = () => {
     "이 게임에서는 \n 포켓몬 보드 게임 Splender를 \n 다른 사람들과 온라인으로 즐길 수 있습니다.",
     "아이콘과 플레이어 이름을 \n 설정해 주십시오.",
   ];
+  const postScript = "※아이콘은 언제든지 변경할 수 있습니다※";
 
   const totalSteps = description.length;
 
@@ -61,7 +62,12 @@ const ProfilePage: React.FC = () => {
         </>
       );
     }
-    return <ModalBody step={step}>{description[step - 1]}</ModalBody>;
+    return (
+      <ModalBody step={step}>
+        {description[step - 1]}
+        {postScript}
+      </ModalBody>
+    );
   };
 
   return (

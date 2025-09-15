@@ -5,9 +5,9 @@ import loading from "@/assets/loading.svg";
 const Background = styled.div`
   position: relative;
   width: 100vw;
-  height: 100vh;
-  max-height: 100vh;
+  min-height: 100vh;
   overflow-y: auto;
+  overflow-x: hidden;
   background-color: #eff4fa;
 `;
 
@@ -17,8 +17,8 @@ const TriangleTopLeft = styled.div`
   left: 0;
   width: 0;
   height: 0;
-  border-top: 30vh solid #30dde8;
-  border-right: 80vw solid #eff4fa;
+  border-top: 300px solid #30dde8;
+  border-right: 1500px solid #eff4fa;
 `;
 
 const TriangleBottomRight = styled.div`
@@ -27,16 +27,16 @@ const TriangleBottomRight = styled.div`
   right: 0;
   width: 0;
   height: 0;
-  border-bottom: 30vh solid #e2eaf7;
-  border-left: 80vw solid #eff4fa;
+  border-bottom: 300px solid #e2eaf7;
+  border-left: 1500px solid #eff4fa;
 `;
 
 const CardBottomRight = styled.img`
   position: absolute;
-  bottom: 17vh; /* Adjusted to ensure visibility */
-  right: 0; /* Adjusted to ensure visibility */
-  width: 25vw;
-  height: 25vw;
+  bottom: 120px;
+  right: -50px;
+  width: 450px;
+  height: 450px;
 `;
 
 const rotate = keyframes`
@@ -50,10 +50,10 @@ const rotate = keyframes`
 
 const RotatingImage = styled.img`
   position: absolute;
-  top: 25%;
-  left: 37%;
-  width: 25vw;
-  height: 25vw;
+  top: 200px;
+  left: 730px;
+  width: 480px;
+  height: 480px;
 
   animation: ${rotate} 8s linear infinite;
 `;

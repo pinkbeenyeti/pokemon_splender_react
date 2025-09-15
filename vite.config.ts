@@ -10,4 +10,23 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    target: "baseline-widely-available",
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ["react", "react-dom"],
+          router: ["react-router-dom"],
+          query: ["react-query", "@tanstack/react-query-devtools"],
+          ui: ["styled-components", "react-icons"],
+        },
+      },
+    },
+  },
+  optimizeDeps: {
+    include: ["react", "react-dom", "react-router-dom", "styled-components"],
+  },
+  css: {
+    preprocessorMaxWorkers: true,
+  },
 });

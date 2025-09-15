@@ -6,7 +6,7 @@ import {
 
 interface ButtonProps {
   onClick?: () => void;
-  type?: "previous" | "next" | "confirm" | "ok";
+  type?: "previous" | "next" | "confirm" | "ok" | "cancel";
   label: string;
 }
 
@@ -23,6 +23,9 @@ const StepButton: React.FC<ButtonProps> = ({
       break;
     case "ok":
       ButtonComponent = OkButton;
+      break;
+    case "cancel":
+      ButtonComponent = CommonStepButton;
       break;
     case "next":
       ButtonComponent = CommonStepButton;

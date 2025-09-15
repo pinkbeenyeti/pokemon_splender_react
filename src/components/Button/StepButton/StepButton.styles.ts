@@ -30,7 +30,7 @@ export const ConfirmButton = styled(CommonStepButton)`
   color: #ffffff;
 
   &:hover {
-    background-color: #d3dce6;
+    background-color: #adc2dd; /* hover 시 색상 변화 없음 */
   }
 `;
 
@@ -39,6 +39,6 @@ export const OkButton = styled(CommonStepButton)`
   color: #ffffff;
 
   &:hover {
-    background-color: #adc2dd;
+    background-color: #43cdc1;
   }
 `;

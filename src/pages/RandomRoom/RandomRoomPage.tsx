@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { FaUsers, FaUserFriends } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import {
-  LobbyContainer,
-  TutorialBox,
-  TutorialText,
-  RandomMatchBox,
-  SocialMatchBox,
-  MatchText,
-} from "./MainPage.styles";
+  Container,
+  MatchingBoxContainer,
+  MatchingBox,
+  MatchingText,
+} from "./RandomRoomPage.styles";
 import Profile from "@/components/Profile/Profile";
+import BackButton from "@/components/Button/BackButton/BackButton";
 import SettingsIcon from "@/components/Settings/SettingsIcon";
 import SettingsOverlay from "@/pages/Setting/SettingPage";
 import avatarImage from "@/assets/figma/randomroom/avatar-image-1c5cfc.png";
 
-const MainPage: React.FC = () => {
+const RandomRoomPage: React.FC = () => {
   const [isSettingOverlayOpen, setSettingOverlayOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -34,30 +32,31 @@ const MainPage: React.FC = () => {
 
   return (
     <>
-      <LobbyContainer>
+      <Container>
         {/* 프로필 섹션 */}
         <Profile nickname="삥크핀" avatarImage={avatarImage} />
 
-        {/* 튜토리얼 박스 */}
-        <TutorialBox onClick={() => navigate("/tutorial")}>
-          <TutorialText>튜토리얼</TutorialText>
-        </TutorialBox>
+        {/* 뒤로 가기 버튼 */}
+        <BackButton onClick={() => navigate(-1)} />
 
-        {/* 랜덤 매칭 박스 */}
-        <RandomMatchBox onClick={() => navigate("/match/randomRoom")}>
-          <FaUsers size={200} color="#19BBFC" />
-          <MatchText>랜덤 매칭</MatchText>
-        </RandomMatchBox>
-
-        {/* 소셜 매칭 박스 */}
-        <SocialMatchBox onClick={() => navigate("/match/socialRoom")}>
-          <FaUserFriends size={200} color="#19BBFC" />
-          <MatchText>소셜 매칭</MatchText>
-        </SocialMatchBox>
+        {/* 매칭 박스들 */}
+        <MatchingBoxContainer>
+          <MatchingBox onClick={() => console.log("1 vs 1 모드 선택")}>
+            <MatchingText>1 vs 1</MatchingText>
+          </MatchingBox>
+          <MatchingBox onClick={() => console.log("1 vs 1 vs 1 모드 선택")}>
+            <MatchingText>1 vs 1 vs 1</MatchingText>
+          </MatchingBox>
+          <MatchingBox
+            onClick={() => console.log("1 vs 1 vs 1 vs 1 모드 선택")}
+          >
+            <MatchingText>1 vs 1 vs 1 vs 1</MatchingText>
+          </MatchingBox>
+        </MatchingBoxContainer>
 
         {/* 설정 아이콘 */}
         <SettingsIcon onClick={() => setSettingOverlayOpen(true)} />
-      </LobbyContainer>
+      </Container>
       {isSettingOverlayOpen && (
         <SettingsOverlay onClose={() => setSettingOverlayOpen(false)} />
       )}
@@ -65,4 +64,4 @@ const MainPage: React.FC = () => {
   );
 };
 
-export default MainPage;
+export default RandomRoomPage;
